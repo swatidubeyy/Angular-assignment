@@ -1,0 +1,61 @@
+<div class="row" style="padding: 10px; width: 100%;height: 100vh;">
+    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 col-12">
+        <div class="row" *ngFor="let item of singlePerson">
+            <div class="col-12">
+                <h4 style="display: flex; justify-content: center;">{{item.name}}</h4>
+            </div>
+            <div class="col-12 mb-4">
+                <mat-carousel [autoplay]="true" [interval]="1000" [hideArrows] = "true" [proportion] = 50>
+                    <mat-carousel-slide *ngFor="let icn of item.images">
+                      <img src={{icn}} alt="Image {{ icn }}" height="200px" width="350px">
+                    </mat-carousel-slide>
+                </mat-carousel>
+            </div>
+            <div class="col-12"> Name/Designation </div>
+            <div class="col-12">{{item.title}}</div>
+            <hr class="mt-2" />
+            <div class="col-12"> About </div>
+            <div class="col-12">{{item.about}}</div>
+            <hr />
+            <div class="row">
+                <div class="col-6">
+                    <div class="col-12"> Title </div>
+                    <div class="col-12"> Human </div>
+                    <hr class="mt-2" />
+                    <div class="col-12"> Age </div>
+                    <div class="col-12">{{item.Age}}</div>
+                    <hr class="mt-2" />
+                    <div class="col-12"> height </div>
+                    <div class="col-12">{{item.height}}</div>
+                    <hr class="mt-2" />
+                </div>
+                <div class="col-6">
+                    <div class="col-12"> Gender </div>
+                    <div class="col-12"> {{item.gender}} </div>
+                    <hr class="mt-2" />
+                    <div class="col-12"> Body Type </div>
+                    <div class="col-12"> {{item.bodyType}} </div>
+                    <hr class="mt-2" />
+                    <div class="col-12"> Weight </div>
+                    <div class="col-12">{{item.weight}}</div>
+                    <hr class="mt-2" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-9 col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 col-12">
+        <div class="card flex justify-content-center overflow-x-auto">
+            <p-organizationChart [value]="TreeData" [selectionMode]="'single'" (onNodeSelect)="getDetail($event.node)">
+                <ng-template let-node pTemplate="person">
+                    <div class="p-2 text-center d-flex justify-content-center">
+                        <img width="150px" height="115px" [src]="node.data.image"
+                            class="w-3rem h-3rem" />
+                        <span class="text">{{ node.data.name }} <br>
+                           <span class="role"> {{ node.data.title }}</span>
+                        </span>
+                    </div>
+                </ng-template>
+            </p-organizationChart>  
+        </div>
+    </div>
+</div>
